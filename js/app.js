@@ -16,17 +16,33 @@ document.getElementById('add-btn').addEventListener('click',function(){
     const nameInputValue = nameInput.value;
     const priceInputValue = priceInput.value;
     const quantityInputValue = quantityInput.value;
-    console.log(nameInputValue,priceInputValue,quantityInputValue)
+    const total = Number(priceInput.value) * Number(quantityInput.value)
     const tableText = document.createElement('tr');
     tableText.classList.add('item-total')
      tableText.innerHTML = ` <tr>
      <th >${nameInputValue}</th>
      <td>${priceInputValue}</td>
      <td>${quantityInputValue}</td>
-     <td></td>
+     <td>${total}</td>
      </tr>` 
      const tableInfo = document.getElementById('info-table');
      tableInfo.appendChild(tableText);
+     const subTotal = document.getElementById('sub-total');
+     const previousSubTotal = subTotal.innerText;
+     subTotal.innerText = total + Number(previousSubTotal);
+     const tax = document.getElementById('tax');
+     const previousTax = tax.innerText;
+     const taxAmount = (total /100 )* 20 ;
+     tax.innerText = taxAmount + Number(previousTax)
+     const grandTotal = document.getElementById('grand-total');
+     const previousGrandTotal = grandTotal.innerText
+     grandTotal.innerText = total + taxAmount + Number(previousGrandTotal);
+     
+
+     nameInput.value = '';
+     priceInput.value = '';
+     quantityInput.value = '';
+     
 
 
 
